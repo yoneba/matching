@@ -6,7 +6,7 @@
 //find a min/max weight cardinality lambda matching of a complete bipartite graph with m left vertices and n right vertices
 //set PR std::less if you want a minimum weight matching, std::greater if you want a maximum one
 //c is an m*n cost matrix
-//mu (nu) is an array whose i-th element is the partner of i-th left (right) vertex (-1 if unmatched)
+//mu (nu) is a resulting array whose i-th element is the partner of i-th left (right) vertex (-1 if unmatched)
 template<template<typename>class PR = std::less, class mat, class vec1, class vec2>
 void bipartite_weighted_matching(const mat &c, const int m, const int n, const int lambda, vec1 &mu, vec2 &nu) {
 	typedef typename remove_const<typename remove_reference<decltype(c[0][0])>::type>::type number;
@@ -31,7 +31,7 @@ void bipartite_weighted_matching(const mat &c, const int m, const int n, const i
 		while (v != -1) {
 			int u = pred[v] + m;
 			nu[v] = u;
-			swap(mu[u], v);
+			std::swap(mu[u], v);
 		}
 	}
 	delete[]pi, delete[]dist, delete[]pred;
